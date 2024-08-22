@@ -42,7 +42,7 @@ for item in items:
     # print(company_id, category, question, answer, create_dt, update_dt )
     
     with psycopg2.connect(
-        host='localhost',
+        host='192.168.0.49',
         dbname='postgres',
         user='postgres',
         password='1234',
