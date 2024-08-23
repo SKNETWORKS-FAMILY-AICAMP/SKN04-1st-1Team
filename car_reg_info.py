@@ -48,4 +48,10 @@ if response.status_code == 200:
                         port=5432,
                     ) as conn:
                         with conn.cursor() as cur:
-                            cur.execute(f"""INSERT INTO car_reg_info_1 (year, register_cnt, last_increase_cnt) VALUES ('{year}', '{register_cnt}', '{last_increase_cnt}')""")
+                            cur.execute(f"""
+                            MERGE INTO car_reg_info AS target
+                            USING ( SELECT '{year}' as year, {register_cnt} as register_cnt, {last_increase_cnt} as last_increase_cnt) AS source
+                            ON target.year = source.year
+                            WHEN NOT MATCHED THEN
+                                INSERT (year, register_cnt, last_increase_cnt)
+                                VALUES (source.year, source.register_cnt, source.last_increase_cnt)""")           
