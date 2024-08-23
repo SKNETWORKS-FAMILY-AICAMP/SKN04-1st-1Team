@@ -63,7 +63,7 @@
 
 ### 💻 DB 테이블 - ERD 
 
-<p align="center"><img src="ERD.png"/></p>
+<p align="center"><img src="./image/ERD.png"/> <img src="./image/ERD2.png"/> </p>
 
 <hr>
 
