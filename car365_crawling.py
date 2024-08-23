@@ -8,9 +8,19 @@ import requests
 import json
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+from configparser import ConfigParser  # 올바른 클래스 이름
 
 company_id = '300' # car365
-category = 'A01'
+category = 'A01' # 기타
+
+config = ConfigParser()
+config.read('./conf.ini', encoding='utf-8')
+
+HOST     = config['DataBase']['host']
+DB_NAME  = config['DataBase']['db_name']
+USER     = config['DataBase']['user']
+PASSWORD = config['DataBase']['password']
+PORT     = config['DataBase']['port']
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -46,20 +56,23 @@ for item in items:
 
     # print(item.text)
     if cnt % 2 == 0:
-        print(category, question, answer)
+        # print(category, question, answer)
     
         with psycopg2.connect(
-            host='192.168.0.49',
-            dbname='postgres',
-            user='postgres',
-            password='1234',
-            port=5432,
+            host=HOST,
+            dbname=DB_NAME,
+            user=USER,
+            password=PASSWORD,
+            port=PORT,
         ) as conn:
             with conn.cursor() as cur:
-                cur.execute(f"""INSERT INTO question ( company_id,
-                                            category_id,
-                                            question,
-                                            answer ) VALUES ('{company_id}', '{category_id}', '{question}', '{answer}')""")
+                cur.execute(f"""
+                MERGE INTO question AS target
+                USING ( SELECT '{company_id}' as company_id, '{category_id}' as category_id, '{question}' as question, '{answer}' as answer ) AS source
+                ON target.question = source.question
+                WHEN NOT MATCHED THEN
+                    INSERT (company_id, category_id, question, answer)
+                    VALUES (source.company_id, source.category_id, source.question, source.answer)""")           
 
     cnt += 1
     # print(company_id, category, question, answer, create_dt, update_dt )
