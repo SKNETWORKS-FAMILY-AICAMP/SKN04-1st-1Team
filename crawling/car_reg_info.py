@@ -34,7 +34,7 @@ def car_reg_info_start():
 
         print("car_reg 크롤링을 시작합니다.")
 
-        for idx, item in tqdm(enumerate(result_list)):
+        for idx, item in enumerate(result_list):
             if int(item['descDt']) > 2013: 
                 year = item['descDt']
                 if idx % 2 == 0:
