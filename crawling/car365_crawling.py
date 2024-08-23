@@ -27,15 +27,11 @@ def car365_crawling_start():
     # 응답이 성공적인지 확인
     if response.status_code == 200:
         # JSON 데이터 파싱
-        # print(response.text)
         bs = BeautifulSoup(response.text, 'lxml')    
     else:
         print(f"Failed to retrieve data: {response.status_code}")
 
-    # print(response.text)
-
     items = bs.select('table tbody tr')
-    # print(items)
 
     print("car365_crawling_success")
 
@@ -47,10 +43,7 @@ def car365_crawling_start():
         else :
             answer = item.select('td')[1].text.strip()
 
-        # print(item.text)
         if cnt % 2 == 0:
-            # print(category, question, answer)
-        
             with psycopg2.connect(
                 host=HOST,
                 dbname=DB_NAME,
@@ -69,5 +62,4 @@ def car365_crawling_start():
 
         cnt += 1
     print("car365_SQL_success")
-    # print(company_id, category, question, answer)
     return company_id, category, question, answer

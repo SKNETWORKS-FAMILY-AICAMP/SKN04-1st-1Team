@@ -24,7 +24,6 @@ def company_crawling_start():
     # 응답이 성공적인지 확인
     if response.status_code == 200:
         # JSON 데이터 파싱
-        # print(response.text)
         bs = BeautifulSoup(response.text, 'lxml')    
     else:
         print(f"Failed to retrieve data: {response.status_code}")
@@ -36,10 +35,6 @@ def company_crawling_start():
     for item in tqdm(items):
         question = item['title']
         answer   = item['content']
-        # create_dt = item['uploadTs']s
-        # update_dt = item['updateTs']
-        
-        # print(company_id, category, question, answer, create_dt, update_dt )
         
         with psycopg2.connect(
             host=HOST,

@@ -51,10 +51,14 @@
 
   본 프로젝트의 주요 목표는 두 가지입니다. 첫째, 전국 자동차 등록 현황을 통합 관리하는 데이터베이스를 구축하고, 이를 실시간으로 조회할 수 있는 웹 기반 플랫폼을 개발하는 것입니다. 둘째, 기업 FAQ 시스템을 설계하여 고객의 자주 묻는 질문을 효과적으로 관리하고, 자동화된 답변 제공 기능을 통해 고객 지원을 개선하는 것입니다. 이 시스템은 사용자 친화적인 인터페이스를 제공하고, 정확하고 신속한 정보를 통해 사용자 경험을 극대화하는 것을 목표로 합니다
 
-### 🔨 기술 스택 #나중
+### 🔨 기술 스택
 <div>
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white">
+  <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54">
+  <img src="https://img.shields.io/badge/streamlit%20-%23FF0000.svg?style=for-the-badge&logo=streamlit&logoColor=white">
 </div>
 
 <hr>
@@ -63,14 +67,18 @@
 
 ### 💻 DB 테이블 - ERD 
 
-<p align="center"><img src="./image/ERD.png"/> <img src="./image/ERD2.png"/> </p>
+<p align="center"><img src="./image/ERD.png"/></p>
 
 <hr>
 
 ### 📚 주요 프로시저
-<summary><b>1. 전국 자동차 등록 현황 조회</b></summary>
+<summary><b>1. 전국 자동차 등록 현황</b></summary>
+
 <summary><b>2. FAQ 시스템 관리</b></summary>
+
 <summary><b>3. 검색 및 필터링</b></summary>
+
 <summary><b>4. 시각적 대시보드</b></summary>
+
 
 ### 📝 한줄회고

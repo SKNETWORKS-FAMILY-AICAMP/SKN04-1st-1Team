@@ -39,7 +39,6 @@ def hyundai_crawling_start():
                 category_id = 'A05'
             elif category_no == '809':
                 category_id = 'A01'
-            # print(f"{category_no}카테고리의 크롤링에 성공하였습니다.")
             
             # 질문과 답변을 딕셔너리로 묶기
             for question, answer in zip(questions_list, answers_list):
@@ -58,9 +57,9 @@ def hyundai_crawling_start():
                         ON target.question = source.question
                         WHEN NOT MATCHED THEN
                             INSERT (company_id, category_id, question, answer)
-                            VALUES (source.company_id, source.category_id, source.question, source.answer)""")        
-                # print(f"현대모비스 {category_no}카테고리 SQL에 성공하였습니다.")
-        print("현대모비스 크롤링을 모두 마쳤습니다.")
+                            VALUES (source.company_id, source.category_id, source.question, source.answer)""")
+                                
+    print("현대모비스 크롤링을 모두 마쳤습니다.")
     return company_id, category_id, question, answer            
 
     
