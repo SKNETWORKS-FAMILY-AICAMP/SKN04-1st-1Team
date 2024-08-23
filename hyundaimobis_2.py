@@ -22,6 +22,13 @@ USER     = config['DataBase']['user']
 PASSWORD = config['DataBase']['password']
 PORT     = config['DataBase']['port']
 
+# 현대 모비스 카테고리 code 내부 code를 변환하는 함수
+def getCategoryId(category_no):
+    if category_no == '803': return 'A03'
+    elif category_no == '804': return 'A04'
+    elif category_no == '805': return 'A05'
+    elif category_no == '809': return 'A01'
+
 for category_no in category_nos:
     questions_list = []
     answers_list = []
@@ -39,16 +46,10 @@ for category_no in category_nos:
         questions_list.extend(questions)
         answers_list.extend(answers)
 
-        if category_no == '803':
-            category_id = 'A03'
-        elif category_no == '804':
-            category_id = 'A04'
-        elif category_no == '805':
-            category_id = 'A05'
-        elif category_no == '809':
-            category_id = 'A01'
-         
-        # 질문과 답변을 딕셔너리로 묶기
+        category_id = getCategoryId(category_no)
+        print(category_id)
+
+        # # 질문과 답변을 딕셔너리로 묶기
         for question, answer in zip(questions_list, answers_list):
          
             with psycopg2.connect(
@@ -67,20 +68,3 @@ for category_no in category_nos:
                         INSERT (company_id, category_id, question, answer)
                         VALUES (source.company_id, source.category_id, source.question, source.answer)""")         
         
-        # for question, answer in zip(questions_list, answers_list):
-        #     with psycopg2.connect(
-        #             host='192.168.0.49',
-        #             dbname='postgres',
-        #             user='postgres',
-        #             password='1234',
-        #             port=5432,
-        #         ) as conn:
-        #             with conn.cursor() as cur:
-        #                 cur.execute(f"""INSERT INTO question(company_id,
-        #                                             category_id,
-        #                                             question,
-        #                                             answer ) VALUES (
-        #                             '{company_id}', 
-        #                             '{category_id}', 
-        #                             '{question}', 
-        #                             '{answer}')""")
