@@ -66,10 +66,13 @@ for item in items:
             port=PORT,
         ) as conn:
             with conn.cursor() as cur:
-                cur.execute(f"""INSERT INTO question ( company_id,
-                                            category_id,
-                                            question,
-                                            answer ) VALUES ('{company_id}', '{category_id}', '{question}', '{answer}')""")
+                cur.execute(f"""
+                MERGE INTO question AS target
+                USING ( SELECT '{company_id}' as company_id, '{category_id}' as category_id, '{question}' as question, '{answer}' as answer ) AS source
+                ON target.question = source.question
+                WHEN NOT MATCHED THEN
+                    INSERT (company_id, category_id, question, answer)
+                    VALUES (source.company_id, source.category_id, source.question, source.answer)""")           
 
     cnt += 1
     # print(company_id, category, question, answer, create_dt, update_dt )
