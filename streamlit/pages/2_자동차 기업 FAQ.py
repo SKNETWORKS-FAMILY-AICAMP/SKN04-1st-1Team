@@ -1,10 +1,6 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-from PIL import Image
-import requests
 
-st.header('자동차 기업 FAQ')
+st.header(':mag:자동차 기업 FAQ')
 
 st.divider()
 
@@ -25,7 +21,6 @@ conn = st.connection("postgresql", type="sql")
 df = conn.query('SELECT * FROM question;', ttl="10m")
 
 with tab1:
-
     
     # Print results.
     option1 = st.selectbox(
@@ -41,29 +36,29 @@ with tab1:
                 st.write(answer.replace('<br>','').strip())
 
 with tab2:
-    df_a02 = conn.query("SELECT * FROM question WHERE category_id = 'A02';", ttl="10m")
+    df_a03 = conn.query("SELECT * FROM question WHERE category_id = 'A03';", ttl="10m")
     option2 = st.selectbox(
         ' ',
-        [row.question for row in df_a02.itertuples()], 
+        [row.question for row in df_a03.itertuples()], 
         index=0,
         key="2"
     )
     with st.container():
-        for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a02.itertuples()]))):
-            if option2 == [row.question for row in df_a02.itertuples()][idx]:
+        for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a03.itertuples()]))):
+            if option2 == [row.question for row in df_a03.itertuples()][idx]:
                 st.write(answer.replace('<br>','').strip())
 
 with tab3:
-    df_a02 = conn.query("SELECT * FROM question WHERE category_id = 'A02';", ttl="10m")
+    df_a04 = conn.query("SELECT * FROM question WHERE category_id = 'A04';", ttl="10m")
     option2 = st.selectbox(
         ' ',
-        [row.question for row in df_a02.itertuples()], 
+        [row.question for row in df_a04.itertuples()], 
         index=0,
-        key="2"
+        key="3"
     )
     with st.container():
-        for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a02.itertuples()]))):
-            if option2 == [row.question for row in df_a02.itertuples()][idx]:
+        for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a04.itertuples()]))):
+            if option2 == [row.question for row in df_a04.itertuples()][idx]:
                 st.write(answer.replace('<br>','').strip())
 
 with tab4:
@@ -72,10 +67,36 @@ with tab4:
         ' ',
         [row.question for row in df_a02.itertuples()], 
         index=0,
-        key="2"
+        key="4"
     )
     with st.container():
         for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a02.itertuples()]))):
             if option2 == [row.question for row in df_a02.itertuples()][idx]:
+                st.write(answer.replace('<br>','').strip())
+
+with tab5:
+    df_a05 = conn.query("SELECT * FROM question WHERE category_id = 'A05';", ttl="10m")
+    option2 = st.selectbox(
+        ' ',
+        [row.question for row in df_a05.itertuples()], 
+        index=0,
+        key="5"
+    )
+    with st.container():
+        for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a05.itertuples()]))):
+            if option2 == [row.question for row in df_a05.itertuples()][idx]:
+                st.write(answer.replace('<br>','').strip())
+
+with tab6:
+    df_a01 = conn.query("SELECT * FROM question WHERE category_id = 'A01';", ttl="10m")
+    option2 = st.selectbox(
+        ' ',
+        [row.question for row in df_a01.itertuples()], 
+        index=0,
+        key="6"
+    )
+    with st.container():
+        for idx, answer in enumerate(list(dict.fromkeys([row.answer for row in df_a01.itertuples()]))):
+            if option2 == [row.question for row in df_a01.itertuples()][idx]:
                 st.write(answer.replace('<br>','').strip())
 
