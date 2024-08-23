@@ -47,8 +47,7 @@ for category_no in category_nos:
         answers_list.extend(answers)
 
         category_id = getCategoryId(category_no)
-        print(category_id)
-
+        
         # # 질문과 답변을 딕셔너리로 묶기
         for question, answer in zip(questions_list, answers_list):
          
