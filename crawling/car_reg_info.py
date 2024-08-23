@@ -21,7 +21,7 @@ def car_reg_info_start():
 
     # POST 요청 보내기
     response = requests.post(url, data=payload)
-
+    
     # 요청이 성공했는지 확인
     if response.status_code == 200:
         # JSON 형식으로 변환
@@ -31,10 +31,12 @@ def car_reg_info_start():
         result_list = data.get('resultList', [])
         last_increase_cnt = None
         register_cnt = None
+
+        print("car_reg 크롤링을 시작합니다.")
+
         for idx, item in tqdm(enumerate(result_list)):
             if int(item['descDt']) > 2013: 
                 year = item['descDt']
-                print(f"년도: {item['descDt']}, 항목: {item['valNm']}, 값: {item['nmbrVal']}")
                 if idx % 2 == 0:
                     register_cnt = item['nmbrVal']
                 else:
@@ -55,5 +57,5 @@ def car_reg_info_start():
                                     INSERT (year, register_cnt, last_increase_cnt)
                                     VALUES (source.year, source.register_cnt, source.last_increase_cnt)""")
                                 
-    print("car_reg_info_SQL_success")
+    print("car_reg 크롤링을 모두 마쳤습니다.")
     return register_cnt, year, last_increase_cnt

@@ -30,7 +30,7 @@ def company_crawling_start():
 
     items = json.loads(response.text).get('list')  
 
-    print("company_crawling_success")
+    print("컴패니 크롤링을 시작합니다")
 
     for item in tqdm(items):
         question = item['title']
@@ -52,5 +52,5 @@ def company_crawling_start():
                     INSERT (company_id, category_id, question, answer)
                     VALUES (source.company_id, source.category_id, source.question, source.answer)""")
                 
-    print("company_SQL_success")
+    print("컴패니 크롤링을 모두 마쳤습니다.")
     return company_id, category_id, question, answer            

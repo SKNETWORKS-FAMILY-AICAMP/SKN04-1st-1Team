@@ -33,7 +33,7 @@ def car365_crawling_start():
 
     items = bs.select('table tbody tr')
 
-    print("car365_crawling_success")
+    print("car365 크롤링을 시작합니다.")
 
     cnt = 1
     for item in tqdm(items):
@@ -61,5 +61,6 @@ def car365_crawling_start():
                         VALUES (source.company_id, source.category_id, source.question, source.answer)""")           
 
         cnt += 1
-    print("car365_SQL_success")
+        
+    print("car365 크롤링을 모두 마쳤습니다.")
     return company_id, category, question, answer
