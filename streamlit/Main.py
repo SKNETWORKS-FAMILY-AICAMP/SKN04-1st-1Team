@@ -62,5 +62,4 @@ st.write('''
          ''')
 st.divider()
 st.subheader(':gear: ERD')
-st.image("C:/Users/USER/Downloads/ERD.png")
-
+st.image("../image/ERD.png")
