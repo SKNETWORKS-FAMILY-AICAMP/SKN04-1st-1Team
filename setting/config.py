@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 
 config = ConfigParser()
-config.read('./conf.ini', encoding='utf-8')
+config.read('./setting/conf.ini', encoding='utf-8')
 
 HOST     = config['DataBase']['host']
 DB_NAME  = config['DataBase']['db_name']

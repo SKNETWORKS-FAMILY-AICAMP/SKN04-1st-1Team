@@ -12,7 +12,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 company_id = '200'
 category_nos = ['803', '804',  '805', '809']
 
-def hyundai_crawling():
+def hyundai_crawling_start():
     print("현대모비스는 카테고리를 기준으로 진행도를 표시합니다.")
     for category_no in tqdm(category_nos):
         questions_list = []
@@ -39,7 +39,7 @@ def hyundai_crawling():
                 category_id = 'A05'
             elif category_no == '809':
                 category_id = 'A01'
-            print(f"{category_no}카테고리의 크롤링에 성공하였습니다.")
+            # print(f"{category_no}카테고리의 크롤링에 성공하였습니다.")
             
             # 질문과 답변을 딕셔너리로 묶기
             for question, answer in zip(questions_list, answers_list):
@@ -59,7 +59,7 @@ def hyundai_crawling():
                         WHEN NOT MATCHED THEN
                             INSERT (company_id, category_id, question, answer)
                             VALUES (source.company_id, source.category_id, source.question, source.answer)""")        
-                print(f"현대모비스 {category_no}카테고리 SQL에 성공하였습니다.")
+                # print(f"현대모비스 {category_no}카테고리 SQL에 성공하였습니다.")
         print("현대모비스 크롤링을 모두 마쳤습니다.")
     return company_id, category_id, question, answer            
 
