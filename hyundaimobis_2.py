@@ -50,19 +50,37 @@ for category_no in category_nos:
          
         # 질문과 답변을 딕셔너리로 묶기
         for question, answer in zip(questions_list, answers_list):
+         
             with psycopg2.connect(
-                    host='192.168.0.49',
-                    dbname='postgres',
-                    user='postgres',
-                    password='1234',
-                    port=5432,
-                ) as conn:
-                    with conn.cursor() as cur:
-                        cur.execute(f"""INSERT INTO question(company_id,
-                                                    category_id,
-                                                    question,
-                                                    answer ) VALUES (
-                                    '{company_id}', 
-                                    '{category_id}', 
-                                    '{question}', 
-                                    '{answer}')""")
+                host=HOST,
+                dbname=DB_NAME,
+                user=USER,
+                password=PASSWORD,
+                port=PORT,
+            ) as conn:
+                with conn.cursor() as cur:
+                    cur.execute(f"""
+                    MERGE INTO question AS target
+                    USING ( SELECT '{company_id}' as company_id, '{category_id}' as category_id, '{question}' as question, '{answer}' as answer ) AS source
+                    ON target.question = source.question
+                    WHEN NOT MATCHED THEN
+                        INSERT (company_id, category_id, question, answer)
+                        VALUES (source.company_id, source.category_id, source.question, source.answer)""")         
+        
+        # for question, answer in zip(questions_list, answers_list):
+        #     with psycopg2.connect(
+        #             host='192.168.0.49',
+        #             dbname='postgres',
+        #             user='postgres',
+        #             password='1234',
+        #             port=5432,
+        #         ) as conn:
+        #             with conn.cursor() as cur:
+        #                 cur.execute(f"""INSERT INTO question(company_id,
+        #                                             category_id,
+        #                                             question,
+        #                                             answer ) VALUES (
+        #                             '{company_id}', 
+        #                             '{category_id}', 
+        #                             '{question}', 
+        #                             '{answer}')""")
