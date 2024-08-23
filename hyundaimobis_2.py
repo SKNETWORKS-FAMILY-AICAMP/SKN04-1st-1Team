@@ -1,10 +1,12 @@
 import pandas as pd
 import json
+import psycopg2
 import requests
 import itertools
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+from configparser import ConfigParser
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
